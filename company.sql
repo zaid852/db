@@ -1,5 +1,6 @@
-CREATE DATABASE company;
-USE company;
+CREATE DATABASE insurance;
+USE insurance;
+
 
 
 CREATE TABLE PERSON (
