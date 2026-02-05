@@ -75,34 +75,34 @@ INSERT INTO Shipment VALUES
 (104, 3, '2024-04-27'),
 (105, 5, '2024-06-01');
 
--- Query 1: List Order# and Ship_date for orders from Warehouse 2
+
 SELECT order_num, ship_date
 FROM Shipment
 WHERE warehouse_num = 2;
 
--- Query 2: List warehouse info for Kumar's orders
+
 SELECT S.order_num, S.warehouse_num
 FROM Shipment S, Orders O, Customer C
 WHERE S.order_num = O.order_num 
 AND O.cust = C.Cust 
 AND C.cname = 'Kumar';
 
--- Query 3: Customer name, number of orders, and average order amount
+
 SELECT C.cname, COUNT(O.order_num) AS num_orders, AVG(O.order_amt) AS avg_order_amt
 FROM Customer C, Orders O
 WHERE C.Cust = O.cust
 GROUP BY C.cname;
 
--- Query 4: Delete all orders for Kumar
+
 DELETE FROM Orders
 WHERE cust = (SELECT Cust FROM Customer WHERE cname = 'Kumar');
 
--- Query 5: Find item with maximum unit price
+
 SELECT item_num, unitprice
 FROM Item
 WHERE unitprice = (SELECT MAX(unitprice) FROM Item);
 
--- Query 6: Trigger to update order_amt based on quantity and unit price
+
 DELIMITER //
 CREATE TRIGGER update_order_amount
 AFTER INSERT ON Order_item
