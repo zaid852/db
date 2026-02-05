@@ -71,7 +71,7 @@ INSERT INTO PARTICIPATED VALUES
 ('D003', 'KA03EF9012', 4, 20000),
 ('D004', 'KA04GH3456', 5, 10000);
 
- Total people who owned cars in accidents in 2021
+ 
 SELECT COUNT(DISTINCT P.driver_id) AS total_people
 FROM PERSON P, OWNS O, PARTICIPATED PA, ACCIDENT A
 WHERE P.driver_id = O.driver_id 
