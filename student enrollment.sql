@@ -75,11 +75,11 @@ INSERT INTO BOOK_ADOPTION VALUES
 (102, 4, 1004),
 (103, 6, 1005);
 
-Query 1: Add new textbook and make it adopted
+ Add new textbook and make it adopted
 INSERT INTO TEXT VALUES (1006, 'Modern Database Management', 'Pearson', 'Hoffer');
 INSERT INTO BOOK_ADOPTION VALUES (101, 6, 1006);
 
--- Query 2: List textbooks for CS courses using > 2 books
+
 SELECT BA.course_num, T.book_ISBN, T.book_title
 FROM BOOK_ADOPTION BA, TEXT T, COURSE C
 WHERE BA.book_ISBN = T.book_ISBN 
@@ -93,7 +93,7 @@ AND BA.course_num IN (
 )
 ORDER BY T.book_title ASC;
 
--- Query 3: List departments with all books from specific publisher
+
 SELECT C.dept
 FROM COURSE C
 WHERE NOT EXISTS (
@@ -108,7 +108,7 @@ AND EXISTS (
  SELECT 1 FROM BOOK_ADOPTION BA WHERE BA.course_num = C.course_num
 );
 
--- Query 4: List students with maximum marks in DBMS
+
 SELECT S.name, E.marks
 FROM STUDENT S, ENROLL E, COURSE C
 WHERE S.regno = E.regno 
@@ -121,13 +121,13 @@ AND E.marks = (
  AND C2.cname = 'DBMS'
 );
 
--- Query 5: View displaying courses and marks for students
+
 CREATE VIEW StudentCourses AS
 SELECT S.regno, S.name, C.cname, E.marks
 FROM STUDENT S, ENROLL E, COURSE C
 WHERE S.regno = E.regno AND E.course_num = C.course_num;
 
--- Query 6: Trigger to prevent enrollment if marks prerequisite < 40
+
 DELIMITER //
 CREATE TRIGGER check_prerequisite
 BEFORE INSERT ON ENROLL
