@@ -49,13 +49,13 @@ SELECT DISTINCT B.color
 FROM BOAT B, RESERVES R, SAILORS S
 WHERE B.bid = R.bid AND R.sid = S.sid AND S.sname = 'Albert';
 
-Query 2: Sailor IDs with rating >= 8 or reserved boat 103
+
 SELECT DISTINCT S.sid
 FROM SAILORS S
 LEFT JOIN RESERVES R ON S.sid = R.sid
 WHERE S.rating >= 8 OR R.bid = 103;
 
-- Query 3: Sailors who haven't reserved boats with "storm"
+
 SELECT S.sname
 FROM SAILORS S
 WHERE S.sid NOT IN (
@@ -65,7 +65,7 @@ WHERE S.sid NOT IN (
 )
 ORDER BY S.sname ASC;
 
-- Query 4: Sailors who reserved all boats
+
 SELECT S.sname
 FROM SAILORS S
 WHERE NOT EXISTS (
@@ -78,25 +78,25 @@ WHERE NOT EXISTS (
  )
 );
 
--- Query 5: Name and age of oldest sailor
+
 SELECT sname, age
 FROM SAILORS
 WHERE age = (SELECT MAX(age) FROM SAILORS);
 
--- Query 6: Boat ID and avg age for boats reserved by >= 5 sailors aged >= 40
+
 SELECT R.bid, AVG(S.age) AS avg_age
 FROM RESERVES R, SAILORS S
 WHERE R.sid = S.sid AND S.age >= 40
 GROUP BY R.bid
 HAVING COUNT(DISTINCT R.sid) >= 5;
 
--- Query 7: View of boats reserved by sailors with specific rating
+
 CREATE VIEW BoatsByRating AS
 SELECT DISTINCT B.bname, B.color, S.rating
 FROM BOAT B, RESERVES R, SAILORS S
 WHERE B.bid = R.bid AND R.sid = S.sid;
 
--- Query 8: Trigger to prevent boat deletion with active reservations
+
 DELIMITER //
 CREATE TRIGGER prevent_boat_delete
 BEFORE DELETE ON BOAT
