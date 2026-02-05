@@ -71,7 +71,7 @@ INSERT INTO PARTICIPATED VALUES
 ('D003', 'KA03EF9012', 4, 20000),
 ('D004', 'KA04GH3456', 5, 10000);
 
-Query 1: Total people who owned cars in accidents in 2021
+ Total people who owned cars in accidents in 2021
 SELECT COUNT(DISTINCT P.driver_id) AS total_people
 FROM PERSON P, OWNS O, PARTICIPATED PA, ACCIDENT A
 WHERE P.driver_id = O.driver_id 
@@ -79,7 +79,7 @@ AND O.regno = PA.regno
 AND PA.report_number = A.report_number
 AND YEAR(A.acc_date) = 2021;
 
--- Query 2: Number of accidents involving Smith's cars
+
 SELECT COUNT(DISTINCT PA.report_number) AS num_accidents
 FROM PARTICIPATED PA, OWNS O, PERSON P
 WHERE PA.driver_id = O.driver_id 
@@ -87,10 +87,10 @@ AND PA.regno = O.regno
 AND O.driver_id = P.driver_id
 AND P.name = 'Smith';
 
--- Query 3: Add new accident
+
 INSERT INTO ACCIDENT VALUES (6, '2024-12-30', 'Jayanagar');
 
--- Query 4: Delete Mazda belonging to Smith
+
 DELETE FROM CAR
 WHERE regno IN (
  SELECT O.regno
@@ -100,18 +100,18 @@ WHERE regno IN (
  AND O.regno IN (SELECT regno FROM CAR WHERE model = 'Mazda')
 );
 
--- Query 5: Update damage amount for KA09MA1234
+
 UPDATE PARTICIPATED
 SET damage_amount = 35000
 WHERE regno = 'KA09MA1234';
 
--- Query 6: View of car models and years in accidents
+
 CREATE VIEW AccidentCars AS
 SELECT DISTINCT C.model, C.year
 FROM CAR C, PARTICIPATED PA
 WHERE C.regno = PA.regno;
 
--- Query 7: Trigger to prevent driver from > 3 accidents per year
+
 DELIMITER //
 CREATE TRIGGER limit_accidents
 BEFORE INSERT ON PARTICIPATED
