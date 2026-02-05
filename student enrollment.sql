@@ -75,7 +75,7 @@ INSERT INTO BOOK_ADOPTION VALUES
 (102, 4, 1004),
 (103, 6, 1005);
 
- Add new textbook and make it adopted
+ 
 INSERT INTO TEXT VALUES (1006, 'Modern Database Management', 'Pearson', 'Hoffer');
 INSERT INTO BOOK_ADOPTION VALUES (101, 6, 1006);
 
