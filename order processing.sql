@@ -119,7 +119,7 @@ BEGIN
 END;//
 DELIMITER ;
 
--- Query 7: View displaying orderID and shipment date from warehouse 5
+
 CREATE VIEW Warehouse5Shipments AS
 SELECT order_num, ship_date
 FROM Shipment
